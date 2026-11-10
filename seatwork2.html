@@ -1,0 +1,569 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module"
+            src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <title>Blue United FC | Member Portal</title>
+
+    <style>
+        nav.navbar {
+            background-color: #55a7f4 !important;
+            padding-left: 30px;
+            padding-right: 30px;
+            width: 100%;
+            align-self: stretch;
+        }
+        :root {
+            --blue: #1269D3;
+            --blue-light: #4C9AFF;
+            --navy: #071426;
+            --black: #050A12;
+            --white: #FFFFFF;
+            --gray: #64748B;
+            --light-gray: #F3F6FA;
+            --border: #DFE6EF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--light-gray);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+
+        header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .club-logo {
+            width: 48px;
+            height: 52px;
+            background: var(--blue);
+            clip-path: polygon(0 0, 100% 0, 90% 72%,
+                               50% 100%, 10% 72%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .brand h2 {
+            font-size: 19px;
+            letter-spacing: 1.5px;
+            line-height: 1.3;
+        }
+
+        .brand span {
+            color: #A8C9F7;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #D6DFEC;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--blue-light);
+        }
+
+        .nav-button {
+            background: var(--blue);
+            padding: 10px 17px;
+            border-radius: 6px;
+            color: white;
+        }
+
+        .nav-button:hover {
+            background: var(--blue-light);
+            color: white;
+        }
+
+        /* HERO SECTION */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 90% 15%,
+                    #153D70 0%, transparent 45%),
+                linear-gradient(120deg, #071426, #0B1F38);
+            color: white;
+            padding: 76px 8% 82px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border: 1px solid rgba(120, 180, 255, 0.16);
+            border-radius: 50%;
+            right: -80px;
+            top: 25px;
+            box-shadow:
+                0 0 0 35px rgba(120, 180, 255, 0.035),
+                0 0 0 75px rgba(120, 180, 255, 0.025);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .eyebrow {
+            color: var(--blue-light);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 66px);
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: var(--blue-light);
+        }
+
+        .hero p {
+            color: #C3D0E1;
+            font-size: 16px;
+            max-width: 520px;
+            margin-bottom: 30px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            padding: 13px 23px;
+            background: var(--blue);
+            border-radius: 6px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .hero-button:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+
+        .hero-note {
+            display: block;
+            margin-top: 22px;
+            font-size: 11px;
+            color: #9FB4CF;
+            letter-spacing: 2px;
+        }
+
+        /* MEMBERSHIP SECTION */
+
+        .membership-section {
+            padding: 65px 20px 75px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-heading .eyebrow {
+            margin-bottom: 8px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(26px, 4vw, 34px);
+            letter-spacing: -0.7px;
+            margin-bottom: 8px;
+        }
+
+        .section-heading p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .member-card {
+            background: var(--white);
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 35px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 12px 35px rgba(7, 20, 38, 0.06);
+        }
+
+        .card-heading {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 26px;
+        }
+
+        .card-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 9px;
+            background: #EAF3FF;
+            color: var(--blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+        }
+
+        .card-heading h3 {
+            font-size: 20px;
+        }
+
+        .card-heading p {
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #25364B;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #D5DFEA;
+            border-radius: 6px;
+            background: #FCFDFE;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--navy);
+            outline: none;
+            transition: border-color 0.2s,
+                        box-shadow 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(18, 105, 211, 0.12);
+        }
+
+        .search-button {
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            padding: 14px;
+            background: var(--blue);
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s,
+                        transform 0.2s;
+        }
+
+        .search-button:hover {
+            background: #0C55AF;
+            transform: translateY(-1px);
+        }
+
+        .search-button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--blue-light);
+            outline-offset: 3px;
+        }
+
+        #result {
+            margin-top: 22px;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: var(--black);
+            color: white;
+            padding: 27px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        footer p {
+            color: #A9B7C9;
+            font-size: 12px;
+        }
+
+        footer strong {
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        .footer-tagline {
+            color: var(--blue-light);
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 650px) {
+            header {
+                padding: 16px 5%;
+                flex-wrap: wrap;
+            }
+
+            .brand h2 {
+                font-size: 16px;
+            }
+
+            nav {
+                width: 100%;
+                gap: 18px;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 60px 6% 65px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .membership-section {
+                padding: 50px 16px 60px;
+            }
+
+            .member-card {
+                padding: 25px 20px;
+            }
+
+            footer {
+                padding: 25px 6%;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse show" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Meet the creator</a>
+                </li>
+                <li class="nav-item">
+                    <a href="skillstest2.html" class="nav-link">Element Checker</a>
+                </li>
+                <li class="nav-item">
+                    <a href="seatwork2.html" class="nav-link">Verification System</a>
+                </li>
+                <li class="nav-item">
+                    <a href="drill2.html" class="nav-link">Club Member Management</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+
+    <header>
+        <div class="brand">
+            <div class="club-logo">B</div>
+            <div>
+                <h2>BLUE UNITED FC</h2>
+                <span>OFFICIAL CLUB PORTAL</span>
+            </div>
+        </div>
+
+        <nav aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#membership">Membership</a>
+            <a href="#about">About Us</a>
+            <a href="#membership" class="nav-button">
+                Member Portal
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="eyebrow">ONE CLUB. ONE PASSION.</div>
+
+                <h1>
+                    More than a team.<br>
+                    <span>A community.</span>
+                </h1>
+
+                <p>
+                    Welcome to Blue United FC, where passion meets
+                    teamwork. We bring players and supporters together
+                    through the beautiful game.
+                </p>
+
+                <a href="#membership" class="hero-button">
+                    Check Your Membership &rarr;
+                </a>
+
+                <span class="hero-note">
+                    UNITY &nbsp; / &nbsp; DISCIPLINE &nbsp; /
+                    &nbsp; EXCELLENCE
+                </span>
+            </div>
+        </section>
+
+        <section class="membership-section" id="membership">
+            <div class="section-heading">
+                <div class="eyebrow">YOUR CLUB. YOUR TEAM.</div>
+                <h2>Member Verification</h2>
+                <p>
+                    Enter your details to check your club membership.
+                </p>
+            </div>
+
+            <div class="member-card">
+                <div class="card-heading">
+                    <div class="card-icon">&#9917;</div>
+                    <div>
+                        <h3>Member Checker</h3>
+                        <p>Blue United FC Membership Services</p>
+                    </div>
+                </div>
+
+                <form onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            placeholder="Enter your first name"
+                            autocomplete="given-name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input
+                            type="text"
+                            id="last_name"
+                            name="last_name"
+                            placeholder="Enter your last name"
+                            autocomplete="family-name"
+                            required
+                        >
+                    </div>
+
+                    <button
+                        type="button"
+                        class="search-button"
+                        py-click="student_club"
+                    >
+                        Check Membership &nbsp; &rarr;
+                    </button>
+                </form>
+
+                <div id="result" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section class="membership-section" id="about"
+                 style="padding-top: 0;">
+            <div class="section-heading">
+                <div class="eyebrow">MORE THAN FOOTBALL</div>
+                <h2>Built on Teamwork</h2>
+                <p>
+                    We believe in commitment, respect, and the power
+                    of bringing people together through sport.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <strong>BLUE UNITED FC</strong>
+            <p>&copy; 2026 Blue United FC. All rights reserved.</p>
+        </div>
+
+        <div class="footer-tagline">
+            PLAY WITH PURPOSE.
+        </div>
+    </footer>
+
+    <py-script src="seatwork2.py"></py-script>
+
+</body>
+</html>
